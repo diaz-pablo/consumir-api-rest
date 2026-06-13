@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'package:consumir_api_rest/common/constants/url_constants.dart';
 import 'package:consumir_api_rest/common/enumartions.dart';
@@ -17,19 +18,29 @@ class HTTPExecute {
   });
 
   get() {
-
+    return checkConnection(HTTPMethod.get);
   }
 
   post() {
-
+    return checkConnection(HTTPMethod.post);
   }
 
   put() {
-
+    return checkConnection(HTTPMethod.put);
   }
 
   delete() {
+    return checkConnection(HTTPMethod.delete);
+  }
 
+  checkConnection(HTTPMethod httpMethod) async {
+    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+    
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      return null; // Devolver error
+    } else {
+      executeMethod(httpMethod);
+    }
   }
 
   executeMethod(HTTPMethod httpMethod) async {
