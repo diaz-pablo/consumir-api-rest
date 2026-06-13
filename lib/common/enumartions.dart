@@ -4,3 +4,9 @@ enum HTTPMethod {
   put,
   delete
 }
+
+enum TypeRequestError {
+  connectionError,
+  serverError,
+  messageError
+}

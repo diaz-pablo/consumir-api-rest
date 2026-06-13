@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:consumir_api_rest/http_protocol/request_error.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
 
@@ -37,7 +38,7 @@ class HTTPExecute {
     final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
     
     if (connectivityResult.contains(ConnectivityResult.none)) {
-      return null; // Devolver error
+      return RequestError(typeRequestError: TypeRequestError.connectionError).getRequestError();
     } else {
       executeMethod(httpMethod);
     }
@@ -75,7 +76,7 @@ class HTTPExecute {
   validateResponse(http.Response response) {
     return (response.statusCode >= 200 && response.statusCode < 300) 
       ? response.body.toString()
-      : null; // Devolver error
+      : RequestError(typeRequestError: TypeRequestError.serverError, response: response).getRequestError();
   }
 
 }
