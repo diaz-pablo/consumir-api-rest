@@ -40,7 +40,7 @@ class HTTPExecute {
     if (connectivityResult.contains(ConnectivityResult.none)) {
       return RequestError(typeRequestError: TypeRequestError.connectionError).getRequestError();
     } else {
-      executeMethod(httpMethod);
+      return executeMethod(httpMethod);
     }
   }
 
@@ -62,11 +62,11 @@ class HTTPExecute {
         break;
     }
 
-    validateResponse(response);
+    return validateResponse(response);
   }
 
   Map<String, String> get headers => {
-    "content-type": "application/json"
+    // "content-type": "application/json"
   };
 
   String get encodedParameters => json.encode(parameters);

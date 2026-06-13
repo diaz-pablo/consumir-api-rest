@@ -1,7 +1,7 @@
 import 'package:consumir_api_rest/http_protocol/request_error.dart';
 
 class Validate {
-  Map data;
+  var data;
   Validate(this.data);
 
   checkKeyExists(String key, var valueDefault) {
@@ -20,5 +20,9 @@ class Validate {
 
   hasRequestErrorOrBody(var method) {
     return (data is RequestError) ? data : method(data);
+  }
+
+  static isNotRequestError(data) {
+    return (data is! RequestError);
   }
 }

@@ -1,3 +1,6 @@
+import 'package:consumir_api_rest/common/validate.dart';
+import 'package:consumir_api_rest/http_protocol/request_error.dart';
+import 'package:consumir_api_rest/models/post_model.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -55,6 +58,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  @override
+  void initState() {
+    // super.initState();
+    executeMethod();
+  }
+
+  executeMethod() async {
+    var posts = await PostModel().getPosts();
+
+    if(Validate.isNotRequestError(posts)) {
+      print("IDs de los POSTS: " + posts.toString());
+      // print("TITULO: " + posts.toString());
+    } else {
+      RequestError requestError = posts as RequestError;
+      print(requestError.messageError);
+    }
+  }
 
   void _incrementCounter() {
     setState(() {

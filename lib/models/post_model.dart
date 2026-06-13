@@ -1,4 +1,5 @@
 import 'package:consumir_api_rest/common/validate.dart';
+import 'package:consumir_api_rest/http_protocol/resource_execute.dart';
 
 class PostModel {
   int id;
@@ -12,6 +13,12 @@ class PostModel {
     this.body = "",
     this.userId = 0
   });
+
+  @override
+  String toString() {
+    // return title;
+    return id.toString();
+  }
 
   // Map del server lo convertimos en un objeto de este modelo
   toObject(Map<dynamic, dynamic> data) {
@@ -33,5 +40,27 @@ class PostModel {
       "body": body,
       "userId": userId.toString()
     };
+  }
+
+  getPosts() async {
+    var response = await ResourceExecute.getPosts();
+
+    return Validate(response).hasRequestErrorOrBody(getListObject);
+  }
+
+  getPost() async {
+    var response = await ResourceExecute.getPost(id);
+
+    return Validate(response).hasRequestErrorOrBody(toObject);
+  }
+
+  getUserPosts() async {
+    var response = await ResourceExecute.getUserPosts(userId);
+
+    return Validate(response).hasRequestErrorOrBody(getListObject);
+  }
+
+  getListObject(data) {
+    return (data as List).map((map) => toObject(map)).toList();
   }
 }
