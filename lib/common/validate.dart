@@ -1,3 +1,5 @@
+import 'package:consumir_api_rest/http_protocol/request_error.dart';
+
 class Validate {
   Map data;
   Validate(this.data);
@@ -14,5 +16,9 @@ class Validate {
       case bool: return bool.parse(value.toString());
       default: return value;
     }
+  }
+
+  hasRequestErrorOrBody(var method) {
+    return (data is RequestError) ? data : method(data);
   }
 }

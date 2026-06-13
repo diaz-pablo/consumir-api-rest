@@ -75,7 +75,7 @@ class HTTPExecute {
 
   validateResponse(http.Response response) {
     return (response.statusCode >= 200 && response.statusCode < 300) 
-      ? response.body.toString()
+      ? json.decode(response.body.toString())
       : RequestError(typeRequestError: TypeRequestError.serverError, response: response).getRequestError();
   }
 
