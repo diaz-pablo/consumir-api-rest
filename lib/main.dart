@@ -2,6 +2,7 @@ import 'package:consumir_api_rest/common/validate.dart';
 import 'package:consumir_api_rest/http_protocol/request_error.dart';
 import 'package:consumir_api_rest/models/post_model.dart';
 import 'package:consumir_api_rest/ui/components/lists/post_list.dart';
+import 'package:consumir_api_rest/ui/screen/post_form_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -91,6 +92,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: PostList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PostFormScreen())),
+        tooltip: "Crear post",
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
