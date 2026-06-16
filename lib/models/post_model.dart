@@ -66,7 +66,9 @@ class PostModel {
   }
 
   savePost() async {
-    var response = await ResourceExecute.createPost(toMap());
+    var response = (id > 0) 
+      ? await ResourceExecute.updatePost(id, toMap())
+      : await ResourceExecute.createPost(toMap());
 
     return Validate(response).hasRequestErrorOrBody(toObject);
   }

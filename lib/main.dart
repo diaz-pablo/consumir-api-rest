@@ -80,12 +80,21 @@ class _MyHomePageState extends State<MyHomePage> {
     // }
     
     // ############## POST
-    var post = await PostModel(title: "nuevo post", body: "hola mundo!", userId: 1).savePost();
+    // var post = await PostModel(title: "nuevo post", body: "hola mundo!", userId: 1).savePost();
+    // if (Validate.isNotRequestError(post)) {
+    //   print("Post save: " + post.toString());
+    // } else {
+    //   RequestError requestError = post as RequestError;
+    //   print("Post save error: " + requestError.messageError);
+    // }
+
+    // ############## PUT
+    var post = await PostModel(id: 1, title: "edit post", body: "hola mundo!", userId: 1).savePost();
     if (Validate.isNotRequestError(post)) {
-      print("Post save: " + post.toString());
+      print("Post update: " + post.toString());
     } else {
       RequestError requestError = post as RequestError;
-      print("Post save error: " + requestError.messageError);
+      print("Post update error: " + requestError.messageError);
     }
   }
 
