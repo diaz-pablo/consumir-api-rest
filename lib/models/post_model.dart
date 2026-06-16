@@ -17,6 +17,7 @@ class PostModel {
   @override
   String toString() {
     // return title;
+    // return body;
     return id.toString();
   }
 
@@ -62,5 +63,11 @@ class PostModel {
 
   getListObject(data) {
     return (data as List).map((map) => toObject(map)).toList();
+  }
+
+  savePost() async {
+    var response = await ResourceExecute.createPost(toMap());
+
+    return Validate(response).hasRequestErrorOrBody(toObject);
   }
 }

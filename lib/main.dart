@@ -66,16 +66,26 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   executeMethod() async {
-    var posts = await PostModel().getPosts();
-    // var posts = await PostModel(id: 1).getPost();
-    // var posts = await PostModel(userId: 1).getUserPosts();
+    // ############## GET
+    // var posts = await PostModel().getPosts();
+    // // var posts = await PostModel(id: 1).getPost();
+    // // var posts = await PostModel(userId: 1).getUserPosts();
 
-    if(Validate.isNotRequestError(posts)) {
-      print("IDs de los POSTS: " + posts.toString());
-      // print("TITULO: " + posts.toString());
+    // if(Validate.isNotRequestError(posts)) {
+    //   print("IDs de los POSTS: " + posts.toString());
+    //   // print("TITULO: " + posts.toString());
+    // } else {
+    //   RequestError requestError = posts as RequestError;
+    //   print(requestError.messageError);
+    // }
+    
+    // ############## POST
+    var post = await PostModel(title: "nuevo post", body: "hola mundo!", userId: 1).savePost();
+    if (Validate.isNotRequestError(post)) {
+      print("Post save: " + post.toString());
     } else {
-      RequestError requestError = posts as RequestError;
-      print(requestError.messageError);
+      RequestError requestError = post as RequestError;
+      print("Post save error: " + requestError.messageError);
     }
   }
 
