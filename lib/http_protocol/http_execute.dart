@@ -66,7 +66,7 @@ class HTTPExecute {
   }
 
   Map<String, String> get headers => {
-    // "content-type": "application/json"
+    "Content-type": "application/json; charset=UTF-8"
   };
 
   String get encodedParameters => json.encode(parameters);
