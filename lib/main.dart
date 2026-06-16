@@ -67,6 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   executeMethod() async {
     var posts = await PostModel().getPosts();
+    // var posts = await PostModel(id: 1).getPost();
+    // var posts = await PostModel(userId: 1).getUserPosts();
 
     if(Validate.isNotRequestError(posts)) {
       print("IDs de los POSTS: " + posts.toString());

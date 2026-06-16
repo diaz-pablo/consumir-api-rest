@@ -71,7 +71,7 @@ class HTTPExecute {
 
   String get encodedParameters => json.encode(parameters);
 
-  get endPoint => (queryParameters.isNotEmpty) ? Uri.https(url, resource, queryParameters) : Uri.parse(uri+resource);
+  get endPoint => (queryParameters.isNotEmpty) ? Uri.https(domain, resource, queryParameters) : Uri.parse(uri+resource);
 
   validateResponse(http.Response response) {
     return (response.statusCode >= 200 && response.statusCode < 300) 
