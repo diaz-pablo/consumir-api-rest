@@ -74,7 +74,7 @@ class HTTPExecute {
   get endPoint => (queryParameters.isNotEmpty) ? Uri.https(domain, resource, queryParameters) : Uri.parse(uri+resource);
 
   validateResponse(http.Response response) {
-    // print("validateResponse: " + response.body.toString());
+    print("validateResponse: " + response.body.toString());
 
     return (response.statusCode >= 200 && response.statusCode < 300) 
       ? json.decode(response.body.toString())
